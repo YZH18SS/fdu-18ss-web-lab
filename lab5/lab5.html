@@ -18,7 +18,7 @@
    <![endif]-->
 </head>
 
-<body>
+<body onload="wr()">
 
 <header>
 
@@ -117,7 +117,7 @@
          <h2>View Cart</h2>
       </div>
          
-      <table class="table table-condensed">
+      <table class="table table-condensed" id="table">
          <tr>
             <th>Image</th>
             <th>Product</th>
@@ -129,20 +129,20 @@
          <!-- 这是你需要修改的地方 -->
          <!-- 本来是下面这样👇 -->
 
-         <!-- <tr>
-            <td><img class="img-thumbnail" src="images/art/tiny/116010.jpg" alt="..."></td>
-            <td>Artist Holding a Thistle</td>
-            <td>2</td>
-            <td>$500</td>
-            <td>$1000</td>
-         </tr>
-         <tr>
-            <td><img class="img-thumbnail" src="images/art/tiny/113010.jpg" alt="..."></td>
-            <td>Self-portrait in a Straw Hat</td>
-            <td>1</td>
-            <td>$700</td>
-            <td>$700</td>
-         </tr>  -->
+<!--          <tr>-->
+<!--            <td><img class="img-thumbnail" src="images/art/tiny/116010.jpg" alt="..."></td>-->
+<!--            <td>Artist Holding a Thistle</td>-->
+<!--            <td>2</td>-->
+<!--            <td>$500</td>-->
+<!--            <td>$1000</td>-->
+<!--         </tr>-->
+<!--         <tr>-->
+<!--            <td><img class="img-thumbnail" src="images/art/tiny/113010.jpg" alt="..."></td>-->
+<!--            <td>Self-portrait in a Straw Hat</td>-->
+<!--            <td>1</td>-->
+<!--            <td>$700</td>-->
+<!--            <td>$700</td>-->
+<!--         </tr>-->
          
          <!-- 你需要按照图片上的要求使用javascript来完成 -->
          <!-- 所需要的数据在这里 -->
@@ -158,21 +158,21 @@
          $price2 = 700;
         -->
 
-         <tr class="success strong">
+         <tr class="success strong" id="re">
             <td colspan="4" class="moveRight">Subtotal</td>
-            <td >$1700</td>
+            <td id="subTotal">$1700</td>
          </tr>
          <tr class="active strong">
             <td colspan="4" class="moveRight">Tax</td>
-            <td>$170</td>
+            <td id="tax">$170</td>
          </tr>  
          <tr class="strong">
             <td colspan="4" class="moveRight">Shipping</td>
-            <td>$100</td>
+            <td id="shipping">$100</td>
          </tr> 
          <tr class="warning strong text-danger">
             <td colspan="4" class="moveRight">Grand Total</td>
-            <td>$1970</td>
+            <td id="grandTotal">$1970</td>
          </tr>    
          <tr >
             <td colspan="4" class="moveRight"><button type="button" class="btn btn-primary" >Continue Shopping</button></td>
@@ -267,4 +267,66 @@
     <script src="bootstrap3_defaultTheme/assets/js/jquery.js"></script>
     <script src="bootstrap3_defaultTheme/dist/js/bootstrap.min.js"></script>    
   </body>
+<script>
+    const table = document.getElementById("table").children;
+    var amou  = [];
+    function wr() {
+        for(var i = 0; i < 2; i ++){
+            var re = document.getElementById("re");
+            var r = aLine(i);
+            re.parentNode.insertBefore(r,re);
+        }
+        calcu();
+    }
+    function aLine(index) {
+        var r = document.createElement("tr");
+        var imBox = document.createElement("td");
+        var pro = document.createElement("td");
+        var qua = document.createElement("td");
+        var pri = document.createElement("td");
+        var amo = document.createElement("td");
+        var im = document.createElement("img");
+        if (index === 0){
+            im.src  = "images/art/tiny/116010.jpg";
+            pro.innerText = "Artist Holding a Thistle";
+            qua.innerText = "2";
+            pri.innerText  = "$500";
+            amo.innerText = "$1000";
+            amou.push(1000);
+        }
+        else {
+            im.src  = "images/art/tiny/113010.jpg";
+            pro.innerText = "Self-portrait in a Straw Hat";
+            qua.innerText = "1";
+            pri.innerText  = "$700";
+            amo.innerText = "$700";
+            amou.push(700);
+        }
+
+        im.setAttribute("class","img-thumbnail");
+        imBox.appendChild(im);
+        r.appendChild(imBox);
+        r.appendChild(pro);
+        r.appendChild(qua);
+        r.appendChild(pri);
+        r.appendChild(amo);
+  return r;
+    }
+    function calcu() {
+        var subTotal = 0;
+        for (var i = 0; i < amou.length; i++){
+            subTotal += amou[i];
+        }
+        document.getElementById("subTotal").innerText = "$" + subTotal;
+        var tax = Math.floor(subTotal * 0.1);
+        document.getElementById("tax").innerText = "$" + tax;
+        var shipping = 0;
+        if(subTotal <= 1000)
+            shipping = 40;
+        document.getElementById("shipping").innerText = "$" + shipping;
+        var grandTotal = subTotal + tax + shipping;
+        document.getElementById("grandTotal").innerText = "$" + grandTotal;
+    }
+
+</script>
 </html>
