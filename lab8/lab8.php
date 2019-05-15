@@ -1,4 +1,6 @@
 <?php include 'functions.inc.php'; ?>
+
+
 <?php 
 
 include 'data.inc.php'; 
@@ -13,6 +15,14 @@ $subtotal = 0;
 $shipping = 0;
 $grandTotal = 0;
 
+$subtotal = $price1 * $quantity1 + $price2 * $quantity2 +$price3 * $quantity3 + $price4 * $quantity4;
+if ($subtotal >= $shippingThreshold )
+    $shipping = 100;
+else
+    $shipping = $shippingFlatAmount;
+
+
+$grandTotal = $subtotal + $shipping;
 ?>
 
 <!DOCTYPE html>
@@ -33,18 +43,19 @@ $grandTotal = 0;
 </head>
 
 <body>
-    
+
 <!-- You should decide where to add the `header.inc.php` and `left.inc.php` -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
             mdl-layout--fixed-header">
-
+    <?php include 'left.inc.php'; ?>
   <main class="mdl-layout__content mdl-color--grey-50">
     <header class="mdl-color--blue-grey-200">
+        <?php include 'header.inc.php'; ?>
       <h4>Order Summaries</h4>
       <p>Examine your customer orders</p>
     </header>   
     <section class="page-content">
-    
+
         <div class="mdl-grid">
 
           <!-- mdl-cell + mdl-card -->
