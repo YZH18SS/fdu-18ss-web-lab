@@ -10,6 +10,15 @@ function generateLink($url, $label, $class) {
 
 function outputPostRow($number)  {
     include("travel-data.inc.php");
+    echo '<li>';
+   echo '<a href="detail.php?id='.$number["id"].'" class="img-responsive">';
+   echo '<img src="images/square/'.$number["path"].'" alt="'.$number["title"].'">';
+   echo '<div class="caption">' ;
+   echo '<div class="blur"></div>';
+   echo '<div class="caption-text">';
+   echo '<h1>'.$number["title"].'</h1>';
+   echo '</div></div></a></li>';
+
 }
 
 /*

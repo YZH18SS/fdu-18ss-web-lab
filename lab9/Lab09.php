@@ -5,7 +5,13 @@ include 'travel-data.inc.php';
 
 
 ?>
+<?php
+include 'functions.inc.php';
 
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +47,11 @@ include 'travel-data.inc.php';
               /* you will need to fill this place with appropriate PHP */
               /* hint: use array and loop */
               //the next line is an example
-              //<a href="list.php?country=Canada" role="button" class="btn btn-default"> Canada</a> 
-
+            // <a href="list.php?country=Canada" role="button" class="btn btn-default"> Canada</a>
+             foreach ( $countries as $button){
+                 $url = 'list.php?country='.$button.'""'.'role="button';
+                 echo generateLink($url,$button,"btn btn-default");
+             }
 
               ?>
                      
@@ -71,6 +80,9 @@ include 'travel-data.inc.php';
    //              	</div>
    //              </a>
 			// </li>
+          foreach ($images as $image){
+              outputPostRow($image);
+          }
           ?>
 
        </ul>       
