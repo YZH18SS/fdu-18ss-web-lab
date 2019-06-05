@@ -34,7 +34,7 @@ function constructRating($rating) {
 function findCountry($id , $path , $alt , $description){
    echo '<li>';
    echo '<a href="detail.php?id=' .$id.'" class="img-responsive">';
-   echo '<img src="images/square-medium/'.$path . '" alt="'.$alt.'">';
+   echo '<img style = "height :230px ; width : 225px "src="images/square-medium/'.$path . '" alt="'.$alt.'">';
    echo '<div class="caption">';
    echo ' <div class="blur"></div>';
    echo '<div class="caption-text">';
